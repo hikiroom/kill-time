@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>stalking-arrow</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+div {
+    width: 50px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 50px solid gold;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 25px);
+    transition: 0.1s;
+}
+</style>
+</head>
+<body>
+<div></div>
+<script>
+    
+window.addEventListener('click', (e) => {
+    const pageX = e.pageX;
+    const pageY = e.pageY;
+    const target = document.querySelector('div');
+    const targetWidth = target.offsetWidth;
+    const targetHeight = target.offsetHeight;
+    const targetRect = target.getBoundingClientRect();
+    const targetRectX = targetRect.left;
+    const targetRectY = targetRect.top;
+    const x = pageX - (targetRectX + (targetWidth / 2));
+    const y = pageY - (targetRectY + (targetHeight / 2));
+    const deg = Math.atan2(y, x) / Math.PI * 180;
+    const left = pageX - targetWidth / 2;
+    const top = pageY - targetHeight / 2;
+
+    target.style.transform = `rotate(${deg}deg)`;
+    target.style.left = `${left}px`;
+    target.style.top = `${top}px`;
+});
+</script>
+</body>
+</html>
